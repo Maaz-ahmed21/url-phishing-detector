@@ -3,7 +3,6 @@ import re
 
 def extract_features(url):
     parsed = urlparse(url)
-
     domain = parsed.netloc
     path = parsed.path
 

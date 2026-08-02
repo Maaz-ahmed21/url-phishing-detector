@@ -1,6 +1,6 @@
-# Phishing URL Detector
+# 🛡️ URL Guard - Phishing & Fraud Detector
 
-A machine learning-based web application that detects phishing URLs by analyzing various features and classifying them as safe or malicious.
+A web application that uses lexical analysis to analyze URL features and classify links as safe or malicious.
 
 ## 🚀 Features
 - Detects phishing URLs in real-time

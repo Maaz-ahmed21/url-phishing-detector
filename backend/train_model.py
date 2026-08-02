@@ -19,9 +19,11 @@ for url in df["url"]:
     feature_list.append(extract_features(url))
 
 X = pd.DataFrame(feature_list)
-y = df["type"]
+label_encoder = LabelEncoder()
+y = label_encoder.fit_transform(df["type"])
 print(X.head())
 
+print(df["type"].value_counts())
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -38,7 +40,10 @@ model = RandomForestClassifier(
 
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
+print("Unique predictions:", set(y_pred))
 accuracy = accuracy_score(y_test, y_pred)
 
+joblib.dump(model, "model.pkl")
+joblib.dump(label_encoder, "label_encoder.pkl")
 print("Accuracy:", accuracy)
 print(classification_report(y_test, y_pred))

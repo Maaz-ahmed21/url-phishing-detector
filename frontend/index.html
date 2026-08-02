@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Guard - Server-Rendered Phishing URL Detector (No JS)</title>
+    <meta name="description" content="Uses lexical analysis">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Hidden Pure CSS Radio Tab Controls -->
+    <input type="radio" id="tab-single" name="nav-tabs" class="nav-radio" checked>
+    <input type="radio" id="tab-batch" name="nav-tabs" class="nav-radio">
+    <input type="radio" id="tab-handbook" name="nav-tabs" class="nav-radio">
+
+    <!-- Header Navigation -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <div class="brand-icon">🛡️</div>
+                <div class="brand-text">
+                    <span class="brand-name">URL <span class="brand-accent">Guard</span></span>
+                    <span class="brand-tagline">Cyber Threat Detector</span>
+                </div>
+            </div>
+
+            <div class="nav-tabs-wrapper">
+                <label for="tab-single" class="nav-label label-single">🔍 Single Scan</label>
+                <label for="tab-batch" class="nav-label label-batch">📑 Batch Scanner</label>
+                <label for="tab-handbook" class="nav-label label-handbook">🛡️ Threat Handbook</label>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+
+        <!-- TAB 1: SINGLE URL SCANNER -->
+        <section id="content-single" class="tab-content">
+            <div class="hero-card">
+                <h1>Inspect Any Web Link Before You Click</h1>
+                <p class="hero-subtitle">Uses lexical analysis to evaluate URL structural parameters, obfuscation patterns, and phishing heuristics.</p>
+
+                <!-- Standard Native HTML Form (No JS needed) -->
+                <form action="http://127.0.0.1:8000/predict" method="POST" class="search-box-form">
+                    <div class="input-wrapper">
+                        <input type="text" name="url" class="url-input" placeholder="Enter URL (e.g. https://example.com/login)..." required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn-primary">Analyze URL</button>
+                </form>
+
+                <div class="sample-links">
+                    <span class="sample-label">Try test samples:</span>
+                    <a href="http://127.0.0.1:8000/predict?url=https://google.com" class="sample-chip">🟢 Safe URL</a>
+                    <a href="http://127.0.0.1:8000/predict?url=http://login-verify-account-security-update.com/paypal/login" class="sample-chip">🔴 Phishing Sample</a>
+                    <a href="http://127.0.0.1:8000/predict?url=http://192.168.1.105/bank/auth.php" class="sample-chip">🟠 Suspicious IP</a>
+                    <a href="http://127.0.0.1:8000/predict?url=http://update-system-firmware-patch.net/installer.exe" class="sample-chip">🟣 Malicious Sample</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: BATCH SCANNER -->
+        <section id="content-batch" class="tab-content">
+            <div class="section-card">
+                <h2>Batch Link Scanner</h2>
+                <p class="section-desc">Paste up to 20 URLs below (one per line) for server-side threat analysis.</p>
+
+                <form action="http://127.0.0.1:8000/batch" method="POST">
+                    <textarea name="urls" class="batch-textarea" placeholder="https://example1.com&#10;http://phishing-site-test.com/login&#10;https://google.com"></textarea>
+                    <button type="submit" class="btn-primary">Scan All Links</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- TAB 3: THREAT HANDBOOK -->
+        <section id="content-handbook" class="tab-content">
+            <div class="handbook-grid">
+                <div class="handbook-card">
+                    <h3>Common Phishing Tactics</h3>
+                    <p>Phishers use cunning techniques to deceive victims into handing over credentials:</p>
+                    <ul>
+                        <li><strong>Typosquatting:</strong> Registering slight typos of popular brands (e.g. <code>paypa1.com</code>).</li>
+                        <li><strong>Subdomain Mimicry:</strong> Nesting legitimate names in subdomains (e.g. <code>paypal.com.verify-login.net</code>).</li>
+                        <li><strong>Raw IP Address:</strong> Using numeric hostnames to bypass domain lookup reputation.</li>
+                        <li><strong>Credential Obfuscation:</strong> Embedding the <code>@</code> symbol to mask real targets.</li>
+                    </ul>
+                </div>
+
+                <div class="handbook-card">
+                    <h3>How Machine Learning Detects Phishing</h3>
+                    <p>Our model evaluates structural parameters extracted directly from the URL string:</p>
+                    <ul>
+                        <li><strong>Entropy & Special Characters:</strong> High count of hyphens, dots, underscores, and equal signs.</li>
+                        <li><strong>Host Character Ratios:</strong> Numerical digit counts compared to alphabet letters.</li>
+                        <li><strong>Protocol Validation:</strong> Presence of standard HTTPS certificates vs raw HTTP.</li>
+                        <li><strong>Random Forest Classification:</strong> Decision tree ensembles trained on malicious dataset URL strings.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
