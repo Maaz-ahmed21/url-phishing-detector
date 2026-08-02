@@ -12,7 +12,7 @@ import joblib
 from features import extract_features
 
 app = FastAPI(
-    title="Link Check",
+    title="URL Guard",
     description="Uses lexical analysis",
     version="2.0.0"
 )
@@ -461,7 +461,7 @@ def render_html_page(active_tab="single", result_data=None, batch_results=None, 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Check - Server-Rendered Phishing URL Detector</title>
+    <title>URL Guard - Server-Rendered Phishing URL Detector</title>
     <meta name="description" content="Uses lexical analysis.">
     
     <!-- Google Fonts -->
